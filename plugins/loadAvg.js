@@ -1,26 +1,22 @@
 // SN4T14 2016-01-31
 // License: WTFPL
-/* jshint node: true */
 'use strict';
 
 var Promise = require('bluebird');
-var child_process = Promise.promisifyAll(require('child_process'));
+var os = require('os');
 
 module.exports = function (globalConfig, config, dal) {
 	setInterval(function() {
 		return Promise.try(function() {
-			child_process.exec("uptime", function (err, stdout, stderr) {
-				var loads = stdout.split(',').slice(-3).map(Function.prototype.call, String.prototype.trim); // Dreaded string parsing, this'll break at some point, maybe there's a file in /proc/?
-				loads[0] = loads[0].split(' ')[2];
+			var loads = os.loadavg();
 
-				var points = [
-					[Number(loads[0]), {hostname: globalConfig.hostname, resolution: "1min"}],
-					[Number(loads[1]), {hostname: globalConfig.hostname, resolution: "5min"}],
-					[Number(loads[2]), {hostname: globalConfig.hostname, resolution: "15min"}]
-				];
+			var points = [
+				{values: {value: Number(loads[0])}, metadata: {hostname: globalConfig.hostname, resolution: "1min"}},
+				{values: {value: Number(loads[1])}, metadata: {hostname: globalConfig.hostname, resolution: "5min"}},
+				{values: {value: Number(loads[2])}, metadata: {hostname: globalConfig.hostname, resolution: "15min"}}
+			];
 
-				return dal.writePoints("cpu_load_average", points);
-			});
+			return dal.writePoints("cpu_load_average", points);
 		});
 	}, 1000 * config.rate);
 };

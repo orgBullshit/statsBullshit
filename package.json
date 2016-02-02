@@ -1,0 +1,25 @@
+{
+  "name": "statsbs",
+  "version": "0.1.0",
+  "description": "statsBullshit",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://git@git.git/git.git"
+  },
+  "keywords": [
+    "statsBullshit",
+    "statsbs",
+    "bullshit"
+  ],
+  "author": "SN4T14",
+  "license": "WTFPL",
+  "dependencies": {
+    "bluebird": "^3.1.5",
+    "influx": "^4.1.0",
+    "js-yaml": "^3.5.2"
+  }
+}

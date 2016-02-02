@@ -1,0 +1,13 @@
+database: "influxDB" # Note: Can be used for path traversal and other nasties, make sure you trust this
+influxDB:
+    host: "localhost"
+    port: "8086"
+    protocol: "http"
+    username: "admin"
+    password: "password"
+    database: "test_db"
+pluginGlobals:
+    hostname: "wadsworth"
+plugins:
+    loadAvg:
+        rate: 10

@@ -1,4 +1,4 @@
-BlogBullshit
+StatsBullshit
 =============
 
 A minimalistic stats gathering daemon with a focus on not sucking.

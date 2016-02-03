@@ -6,8 +6,6 @@ influxDB:
     username: "admin"
     password: "password"
     database: "test_db"
-pluginGlobals:
-    hostname: "wadsworth"
 plugins:
     loadAvg:
         rate: 10
